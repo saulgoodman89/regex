@@ -363,3 +363,107 @@ d{3,} : 최소 3자리 숫자
 This offer is not available to customers living in <B>AK</B> and <B>HI</B>
 
 This offer is not available to customers living in **<B>AK</B> and <B>**HI</B>
+
+greedy / lazy quanifier 
+greedy : * , + , {n,}
+lazy : *? , +? , {n,}?
+
+
+정규 표현식 
+<[Bb]>.*?</[Bb]>
+This offer is not available to customers living in <B>AK</B> and <B>HI</B>
+
+This offer is not available to customers living in **<B>AK</B>** and **<B>HI</B>**
+
+
+## 위치 찾기 
+### 단어 경계 지정하기 
+- \b : 단어의 시작이나 마지막을 일치 시킬 때 사용. 
+완전한 단어 하나를 일치 시키고자 한다면 , 일치 시키고자 하는 단어 앞뒤에 모두 \b를 붙어야한다. 
+
+정규 표현식 
+\bcat\b
+
+The cat scattered his food all over the room
+
+The **cat** scattered his food all over the room
+scattered에서 cat은 앞에는 s , 뒤에는 t가 있어 둘 다 \b와 일치X
+
+
+정규 표현식 
+\bcap
+cap으로 시작하는 모든 단어와 일치. 
+
+The captain wore this cap and cape proudly as he sat listening to the recap of how his crew saved the men from a capsized vessel. 
+
+The **cap**tain wore this **cap** and **cap**e proudly as he sat listening to the recap of how his crew saved the men from a **cap**sized vessel. 
+
+정규 표현식 
+cap\b
+cap으로 끝나는 모든 단어와 일치 
+The captain wore this cap and cape proudly as he sat listening to the recap of how his crew saved the men from a capsized vessel. 
+
+The captain wore this **cap** and cape proudly as he sat listening to the re**cap** of how his crew saved the men from a capsized vessel. 
+
+
+특별히 단어 경계와 일치 시키고 싶지 않을 때는 \B를 사용 
+- \B : 
+
+정규 표현식 
+\B-\B
+단어 구분 문자로 둘러사인 하이픈과 일치 
+Please enter the nine-digit id as it appears on your color - coded pass-key.
+
+Please enter the nine-digit id as it appears on your color **-** coded pass-key.
+
+
+### 문자열 경계 정의하기 
+단어 경계는 단어의 위치(시작/마지막/전체)를 기반으로 위치를 찾는다. 
+
+문자열 경계 문자
+- ^ : 문자열 시작. 패턴 시작 부분에 ^ 문자를 쓰면 문자열의 시작 부분과 일치 
+- $ : 문자열 마지막 
+
+정규 표현식
+<\?xml.*\?>
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://tips.cf"
+xmlns:impl="http://tips.cf" xmlns:intf="http://tips.cf"
+xmlns:apachesoap="http://xml.apache.org/xml-soap">
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+
+정규 표현식
+<\?xml.*\?>
+
+
+This is bad, real bad!
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://tips.cf"
+xmlns:impl="http://tips.cf" xmlns:intf="http://tips.cf"
+xmlns:apachesoap="http://xml.apache.org/xml-soap">
+
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+정규 표현식 
+^\s*<\?xml.*\?>
+^ : 문자열 일치 
+^\s* : 문자열 시작이면서 바로 뒤에 공백 문자가 ㅇ벗거나 하나 이상 있는 경우 일치 
+
+<!--
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://tips.cf"
+xmlns:impl="http://tips.cf" xmlns:intf="http://tips.cf"
+xmlns:apachesoap="http://xml.apache.org/xml-soap">
+
+<?xml version="1.0" encoding="UTF-8" ?>
+-->
+
+### 다중행 모드 사용하기 
+- 

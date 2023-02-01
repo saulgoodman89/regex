@@ -1,3 +1,10 @@
+## regex 연습 사이트 
+https://regexone.com/
+https://www.acmicpc.net/workbook/view/6082
+http://play.inginf.units.it/#/
+https://www.funtrivia.com/trivia-quiz/SciTech/Regular-Expressions-101-389113.html
+
+
 ## 메타문자 
 
 - .  : 어떤 문자와도 일치 ex) esacpe 하지 않아도 문자 그대로 인식 
@@ -18,6 +25,34 @@
 - $ : 문자열 마지막 
 - ?m : 다중행 
 
+1. Groups and ranges
+- | 또는
+- () 그룹
+- [] 문자셋, 괄호안의 어떤 문자든
+- [^] 문자셋. 괄호안의 어떤 문자가 아니여야 함
+- (?:) 찾지만 기억하지는 않음(그룹으로 지정하지 않겠다)
+2. Quantifiers
+- ? 없거나 있거나 (zero or one)
+- * 없거나 있거나 많거나 (zero or more)
+- + 하나 또는 많이 (one or more)
+- {n} n번 반복
+- {min,} 최소
+- {min,max} 최소. 그리고 최대
+3. Boundary-type
+- \b 단어 경계
+- \B 단어 경계가 아님
+- ^ 문장의 시작
+- $ 문장의 끝
+4. Character classes
+- \ 특수문자가 아닌 문자
+- . 어떤 글자(줄바꿈 문자 제외)
+- \d digit 숫자
+- \D digit 숫자 아님
+- \w word 문자
+- \W word 문자 아님
+- \s space 공백
+- \S space 공백 아님
+
 
 ### POSIX 문자 클래스 
 [:alnum:] 모든 영숫자([a-zA-Z0-9])
@@ -32,3 +67,18 @@
 [:space:] 빈칸을 포함한 모든 공백 문자([\f\n\r\t\v])
 [:upper:] 모든 대문자([A-Z])
 [:xdigit:] 모든 16진수 숫자(a-fA-F0-9) 
+
+
+### 해제 해보기 
+abc*[\w.]+
+
+abcdefg
+abcde
+abc
+
+**abcdefg**
+**abcde**
+**abc**
+
+
+

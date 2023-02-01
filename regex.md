@@ -10,7 +10,7 @@ https://regex101.com/
 - 대다수의 정규 표현식 엔진은 기본적으로 가장 처음 일치한 텍스트를 반환. 
 - 정규표현식은 대소문자를 구분한다.  but 대소문자 구별을 무시하는 기능이 있다. 
 
-- .  : 어떤 문자와도 일치 ex) linux의 *  , esacpe 하지 않아도 문자 그대로 인식 
+- .  : 어떤 문자와도 일치 ex) esacpe 하지 않아도 문자 그대로 인식 
 - \  문자 그대로 해석되게 한다(escape) 
 
 
@@ -466,4 +466,297 @@ xmlns:apachesoap="http://xml.apache.org/xml-soap">
 -->
 
 ### 다중행 모드 사용하기 
-- 
+- ?m : 다중행 지원. 정규 표현식 엔진이 줄바꿈 문자를 문자열 구분자로 인식. 
+
+(?m)^\s*\/\/.*$
+*\s*//.*$ : 문자열 시작 부분과 바로 뒤에 나오는 공백들 , // , 모든 텍스트 ,  문자열의 끝과 일치. 이 패턴으로는 첫 번째 줄만 인식 
+
+<SCRIPT>
+function dospellCheck(form, field) {
+// Make sure not empty
+	if (field.value '') {
+		return false;
+	}
+	// Init
+	var windowName='spellWindow';
+	var spellCheckURL='spell.cfm?formname=comment&fieldname='+field.name;
+	// Done
+	return false;
+	}
+</SCRIPT>
+
+// Make sure not empty
+
+// Init
+
+// Done
+
+## 하위 표현식 
+
+정규 표현식
+(&nbsp;){2,}
+
+Hello, my name is Ben&nbsp;Forta, and I am
+the author of books on SQL, ColdFusion, WAP,
+Windows &nbsp;&nbsp;2000, and other subjects.
+
+Hello, my name is Ben&nbsp;Forta, and I am
+the author of books on SQL, ColdFusion, WAP,
+Windows**&nbsp;&nbsp**;2000, and other subjects.
+
+
+정규 표현식 
+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}
+
+Pinging hog.forta.com [12.159.46.200]
+with 32 bytes of data:
+
+Pinging hog.forta.com [**12.159.46.200**]
+with 32 bytes of data:
+
+정규 표현식
+19|20\d{2}
+
+| : OR 
+
+ID:042
+SEX: M
+DOB: 1967-08-17
+Status:
+Active
+
+ID:042
+SEX: M
+DOB: **19**67-08-17
+Status:
+Active
+
+
+정규 표현식
+(19|20)\d{2}
+
+ID:042
+SEX: M
+DOB: 1967-08-17
+Status:
+Active
+
+ID:042
+SEX: M
+DOB: **1967**-08-17
+Status:
+Active
+
+
+
+정규 표현식 
+(((\d{1,2})| (1\d{2})| (2[0-4]\d)| (25[0-5]))\.){3}((\d{1,2})| (1\d{2})| (2[04]\d)| (25[0-5]))
+
+Pinging hog.forta.com [12.159.46.200]
+with 32 bytes
+of data:
+
+Pinging hog.forta.com [**12.159.46.200**]
+with 32 bytes
+of data:
+
+
+### 역참조 이해하기 
+
+정규 표현식 
+<[hH]1>.*</[hH]1>
+
+<!--
+
+<BODY>
+<H1>Welcome to my Homepage</H1>
+Content is divided into two sections: <BR>
+<H2>ColdFusion</H2>
+Information
+about
+Macromedia
+ColdFusion.
+<H2>Wireless</H2>
+Information about Bluetooth, 802.11, and more.
+</BODY>
+
+
+<H1>Welcome to my Homepage</H1>
+
+-->
+
+
+정규 표현식 
+<[hH][1-6]>.*?</[hH][1-6]>
+
+<[hH][1-6]> : <H1> , <H2>와 일치 
+
+</[hH][1-6]> : </H1> </H2>
+
+<!-- 
+<BODY>
+<H1>Welcome to my Homepage</H1>
+Content is divided into two sections:<BR>
+<H2>ColdFusion</H2>
+Information
+about Macromedia ColdFusion.
+<H2>Wireless</H2>
+Information about Bluetooth,
+802.11, and more.
+</BODY>
+
+<H1>Welcome to my Homepage</H1>
+<H2>ColdFusion</H2>
+<H2>Wireless</H2>
+
+-->
+
+정규 표현식 
+<[hH][1-6]>.*?</[hH][1-6]>
+
+<!--
+
+
+<BODY>
+<H1>Welcome to my Homepage</H1>
+Content
+is
+divided
+into two
+sections: <BR>
+<H2>ColdFusion</H2>
+Information about Macromedia ColdFusion.
+<H2>Wireless</H2>
+Information
+about
+Bluetooth,
+802.11,
+and more.
+<H2>This is not valid HTML</H3>
+</BODY>
+
+<H1>Welcome to my Homepage</H1>
+<H2>ColdFusion</H2>
+<H2>Wireless</H2>
+<H2>This is not valid HTML</H3>
+-->
+
+
+정규 표현식 
+<[hH]([1-6])>.*?</[hH]\1>
+
+<!--
+
+<BODY>
+<H1>Welcome to my Homepage</H1>
+Content is divided into two sections: <BR>
+<H2>ColdFusion</H2>
+Information about Macromedia ColdFusion.
+<H2>Wireless</H2>
+Information about Bluetooth, 802.11, and more.
+<H2>This is not valid HTML</H3>
+</BODY>
+
+<H1>Welcome to my Homepage</H1>
+<H2>ColdFusion</H2>
+<H2>Wireless</H2>
+-->
+
+### 치환 작업 수행하기 
+정규 표현식 
+\w+[ \w\.]*@[ \w\ . ]+\.\w+
+
+Hello, ben@forta.com is my email address.
+
+Hello, **ben@forta.com** is my email address.
+
+정규 표현식 
+( \w+[\w\.]*@[ \w\.]+\.\w+) \<A HREF="mailto:$1">$1</A>
+Hello, ben@forta.com is my email address.
+
+
+치환이 안됨 
+
+
+정규표현식 
+
+(\d{3})(-)(\d{3})(-)(\d{4}) ($1)$3-$5
+
+313-555-1234
+248-555-9999
+810-555-9000
+
+313-555-1234
+248-555-9999
+810-555-9000
+
+## 전방탐색 & 후방탐색 
+
+### 전후방 탐색 살펴보기 
+
+정규 표현식 
+<[tT][iI][tT][1L][eE]>.*</[tT][iI][tT][1L][eE]>
+
+<!--
+<HEAD>
+<TITLE>Ben Forta's Homepage</TITLE>
+</HEAD>
+
+<TITLE>Ben Forta's Homepage</TITLE>
+ 
+-->
+
+### 전방 탐색(lookahead)
+일치 영역을 발견해도 그 값을 반환하지 않는 패턴 
+- ?=로 표현하고 = 다음에 일치할 텍스트가 온다. 
+
+정규 표현식 
+.+(?=:)
+
+http://www.forta.com/
+https://mail.forta.com/
+ftp://ftp.forta.com/
+
+**http**://www.forta.com/
+**https**://mail.forta.com/
+**ftp**://ftp.forta.com/
+
+
+
+정규 표현식 
+.+(:)
+
+http://www.forta.com/
+https://mail.forta.com/
+ftp://ftp.forta.com/
+
+**http:**//www.forta.com/
+**https:**//mail.forta.com/
+**ftp:**//ftp.forta.com/
+
+### 후방 탐색(lookbehind)
+
+정규 표현식 
+\$[0-9.]+
+
+ABC01:$23.45
+HGG42: $5.31
+CFMX1: $899.00
+XTC99: $69.96
+Total items found:4
+
+ABC01:**$23.45**
+HGG42: **$5.31**
+CFMX1: **$899.00**
+XTC99: **$69.96**
+Total items found:4
+
+
+정규 표현식 
+(?<=\$) [0-9.]+
+
+ABC01:$**23.45**
+HGG42: $**5.31**
+CFMX1: $**899.00**
+XTC99: $**69.96**
+Total items found:4

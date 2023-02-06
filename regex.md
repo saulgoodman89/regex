@@ -492,7 +492,7 @@ function dospellCheck(form, field) {
 // Done
 
 ## 하위 표현식 
-
+하위 표현식 : 큰 표현식 안에 속한 일부 표현식을 한 항목으로 묶는것.
 정규 표현식
 (&nbsp;){2,}
 
@@ -562,6 +562,8 @@ of data:
 
 
 ### 역참조 이해하기 
+역참조(backreferences) : 앞서 일치했떤 하위 표현식을 다시 참조 할 수 있는 기능. 
+
 
 정규 표현식 
 <[hH]1>.*</[hH]1>
@@ -760,3 +762,45 @@ HGG42: $**5.31**
 CFMX1: $**899.00**
 XTC99: $**69.96**
 Total items found:4
+
+### 전방/후방 함께 사용 
+
+정규표현식 
+(?<=<[tT][iI][tT][1L][eE]>).*(?=</[tT][iI][tT][1L][eE]>)
+
+
+<HEAD>
+<TITLE>Ben Forta's Homepage</TITLE>
+</HEAD>
+
+Ben Forta's Homepage
+
+
+### 부정형 전후방 탐색
+(?=) 긍정형 전방탐색
+(?!) 부정형 전방탐색 : 앞쪽에서 지정한 패턴과 일치하지 않는 텍스트를 찾는다.
+(?<=) 긍정형 후방탐색
+(?<!) 부정형 후방탐색  : 뒤쪽에서 지정한 패턴과 일치하지 않는 텍스트 
+
+정규 표현식    
+(?<=\$)\d+   
+
+I paid $30 for 100 apples,   
+50 oranges, and 60 pears.   
+I saved $5 on this order.
+
+I paid $**30** for 100 apples,   
+50 oranges, and 60 pears.   
+I saved $**5** on this order.   
+
+   
+정규 표현식 
+\b(?<!\$)\d+\b   
+
+I paid $30 for 100 apples,   
+50 oranges, and 60 pears.   
+I saved $5 on this order.   
+   
+I paid $30 for **100** apples,   
+**50** oranges, and **60** pears.   
+I saved $5 on this order.

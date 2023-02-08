@@ -3,22 +3,28 @@
 2.  Match all email addresses:
 		\w@\w\.\w
 3.  Match all dates in the format MM/DD/YYYY:
-		^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})
+		((0[0-9]|1[0-2]))\/((0|1|2)\d{1}|3[0-1])\/((19|20)\d{2})
+		
 4.  Match all URLs starting with "http":
-		http://?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$
+		http:\/\/?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{3}?(\/.*)?
+
 5.  Match all hexadecimal colors:
 		#\w{6}
+
 6.  Match all HTML tags:
 		<[^<>]+>
+
 7.  Match all numbers with a specific number of decimal places:
 		(?<=\.)[\d]+
+
 8.  Match all words starting with a specific letter: 
 		.*
+		
 9.  Match all IP addresses:
 		(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}
 
-10 Match all times in the format HH:MM: 
-		^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$
+10 Match all times in the format HH:MM:
+		([0-1][0-9]|2[0-3]):[0-5][0-9]
 		
 
 000

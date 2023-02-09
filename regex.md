@@ -804,3 +804,92 @@ I saved $5 on this order.
 I paid $30 for **100** apples,   
 **50** oranges, and **60** pears.   
 I saved $5 on this order.
+
+
+## 개념이 약한 부분 재정리 
+
+## 하위 표현식
+
+
+정규 표현식 
+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}   
+
+before
+Pinging hog.forta.com [12.159.46.200]   
+with 32 byrtes of data:
+
+
+after
+Pinging hog.forta.com [<strong>12.159.46.200</strong>]   
+with 32 byrtes of data:
+
+정규 표현식   
+(\d{1,3}\.){3}\d{1,3}   
+
+before
+Pinging hog.forta.com [12.159.46.200]   
+with 32 byrtes of data:
+
+
+after
+Pinging hog.forta.com [<strong>12.159.46.200</strong>]   
+with 32 byrtes of data:   
+   
+정규 표현식 
+19|20\d{2}   
+   
+before 
+ID:042
+SEX: M
+DOB: 1967-08-17
+Status: Active   
+   
+after 
+ID:042
+SEX: M
+DOB: <strong>1967</strong>-08-17
+Status: Active   
+   
+정규 표현식 
+(19|20)\d{2}   
+   
+before 
+ID:042
+SEX: M
+DOB: 1967-08-17
+Status: Active   
+   
+after 
+ID:042
+SEX: M
+DOB: <strong>1967</strong>-08-17
+Status: Active   
+   
+
+### 중첩된 하위 표현식    
+IP 검색하는(값 범위 까지) 정규 표현식 
+(((\d{1,2})| (1\d{2})| (2[0-4]\d)| (25[0-5]))\.){3}((\d{1,2})| (1\d{2})| (2[04]\d)| (25[0-5]))
+\d{1,2} : 0-99 일치 
+1\d{1,2} : 1로 시작하는 모든 3자리 숫자
+2[0-4]\d : 200~249
+   
+(((\d{1,2})| (1\d{2})| (2[0-4]\d)| (25[0-5]))\.){3} : 0-255. 를 3번 반복 
+
+\d{1,2} : 0 - 99
+1\d{2} : 100 - 199
+2[0-4]\d : 200 - 249
+25[0-5] : 250-255
+
+
+
+## 역참조    
+역참조 : 앞서 일치했던 하위 표현식을 다시 참조 할 수 있는 기능. 
+   
+   
+정규표현식   
+[ ]+(\w+)[ ]+\2   
+
+This is a block of of of text,
+several words here are are are 
+repeated, and and and they
+should not be.
